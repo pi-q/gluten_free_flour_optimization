@@ -3,7 +3,7 @@ A quick python script I wrote to compute an optimal flour blend to replace bread
 
 Dependencies: numpy, scipy
 
-This is still in draft form. For now, flour types are hardcoded into the code. Run using:
+This is still in draft form. For now, flour types are hardcoded. Run using:
 ```
 python flour_problem.py
 ```
