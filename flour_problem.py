@@ -25,6 +25,7 @@ oat             = [0.733,      0., 0.133,    0.133,   0.05, 0.0048] #mineral con
 teff            = [0.707,      0., 0.122,    0.122,  0.037, 0.0025] #mineral content unsure
 sorghum         = [0.074,    0.01,   0.1,     0.11,  0.035, 0.0074]
 millet          = [0.734,   0.017, 0.035,    0.108,  0.043, 0.0065]
+cassava         = [0.886,      0., 0.057,       0.,     0., 0.0046] #mineral content unsure
 pea_protein     = [   0.,      0.,    0.,     0.84,   0.15, 0.0050] #mineral content unsure
 pumpkin_protein = [ 0.11,      0.,   0.1,     0.65,   0.08, 0.0020] #mineral content unsure
 
@@ -43,6 +44,7 @@ A  = np.array([ brown_rice,
 	            teff,
 	            sorghum,
 	            millet,
+	            cassava,
 	            pea_protein,
 	            pumpkin_protein ]) 
 
@@ -81,19 +83,20 @@ def print_results(x, desired_flour_grams):
 	print "teff      : ", x[11], " g"
 	print "sorghum   : ", x[12], " g"
 	print "millet    : ", x[13], " g"
-	print "pea       : ", x[14], " g"
-	print "pumpkin   : ", x[15], " g"
+	print "cassava   : ", x[14], " g"
+	print "pea       : ", x[15], " g"
+	print "pumpkin   : ", x[16], " g"
 
 
 x0 = np.zeros(np.shape(A)[0])
 
 x = scipy.optimize.minimize(f, 
 							x0, 
-							bounds = ((0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.)), 
+							bounds = ((0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.), (0., 1.)), 
 							constraints={"fun": constraint, "type": "eq"})
 
 print "         composition:   [ Starch,  Sugars, Fiber, Proteins, Fat, Minerals ]"
 print "Target   composition:  ", str(wheat)
 print "Obtained composition:  ", str(np.dot(np.transpose(A), np.transpose(x.x)))
 
-print_results(x.x, 100)
+print_results(x.x, 115)
